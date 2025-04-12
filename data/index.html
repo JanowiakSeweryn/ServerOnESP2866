@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <script>
+            const TurnLed = class{
+                constructor(ip_on,ip_off,id){
+                    this.ip_on = ip_on;
+                    this.ip_off = ip_off;
+                    this.id = id;
+                }
+                turn(){
+                    this.counter ;
+                    console.log(this.counter);
+                    if(this.counter == 0){
+                        fetch(this.ip_on)
+                        .then(respone=>respone.json());
+                        document.getElementById(this.id).innerHTML = "TURN OFF";
+                        this.counter++;
+                    }
+                    else{
+                        fetch(this.ip_off)
+                        .then(respone=>respone.json());
+                        document.getElementById(this.id).innerHTML = "TURN ON";
+                        this.counter = 0;
+                    }
+                }
+            }
+        
+            //LED_GREEN
+            const led_g_on = "http://192.168.10.1/led_g_on";
+            const led_g_off = "http://192.168.10.1/led_g_off";
+
+            const Led_green = new TurnLed(led_g_on,led_g_off,"g_id");
+
+             //LED_RED
+            const led_r_on = "http://192.168.10.1/led_r_on";
+            const led_r_off = "http://192.168.10.1/led_r_off";
+
+            const Led_red = new TurnLed(led_r_on,led_r_off,"r_id");
+
+            //LED_YELLOW
+            const led_y_on = "http://192.168.10.1/led_y_on";
+            const led_y_off = "http://192.168.10.1/led_y_off";
+
+            const Led_yellow = new TurnLed(led_y_on,led_y_off,"y_id");
+
+        </script>
+        <style>
+            .button{
+                border: none;
+                font-size: large;
+                color: white;
+                padding: 64px 64px;
+                cursor: pointer;
+            }
+            .button1{background-color: rgb(102, 255, 31);}
+            .button1:hover{background-color: rgb(173, 255, 118); }
+
+            .button2{background-color: rgb(255, 55, 55);}
+            .button2:hover{background-color: rgb(255, 142, 142); }
+
+            .button3{background-color: rgb(255, 224, 51);}
+            .button3:hover{background-color: rgb(253, 251, 109); }
+        </style>
+        <title>MyJavaSript</title>
+    </head>
+    <body>
+        <h1>MY ESP 8266 SERVER</h1>
+
+        <p1><button id = r_id  type="button" onclick="Led_red.turn()" class = "button button2">TURN ON</button></p1>
+        <p2><button id = y_id  type="button" onclick="Led_yellow.turn()" class = "button button3">TURN ON</button></p2>
+        <p3><button id = g_id  type="button" onclick="Led_green.turn()" class = "button button1">TURN ON</button></p3>
+    </body>
+</html>

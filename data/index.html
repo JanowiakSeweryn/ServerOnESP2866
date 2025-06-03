@@ -2,75 +2,84 @@
 
 <html>
 
-    <head>
-        <script>
-            const TurnLed = class{
-                constructor(ip_on,ip_off,id){
-                    this.ip_on = ip_on;
-                    this.ip_off = ip_off;
-                    this.id = id;
-                }
-                turn(){
-                    this.counter ;
-                    console.log(this.counter);
-                    if(this.counter == 0){
-                        fetch(this.ip_on)
-                        .then(respone=>respone.json());
-                        document.getElementById(this.id).innerHTML = "TURN OFF";
-                        this.counter++;
-                    }
-                    else{
-                        fetch(this.ip_off)
-                        .then(respone=>respone.json());
-                        document.getElementById(this.id).innerHTML = "TURN ON";
-                        this.counter = 0;
-                    }
-                }
-            }
+<head>
+
+    <title>Robot konfiguracyjny</title>
+ 
+    <link rel="stylesheet" href="styles.css">
+
+    </style>
+</head>
+
+<body>
+
+    <h1 class="h">ROBOT ANTROPOMORFICZNY</h1>
+
+    <!-- movement based on x,y,z parameters:  -->
+
+<div class="control-panel">
+
+    <div class ="div2">
+
+        <div>
+            <button id = "r_id"  class = "button button2">X+</button>
+            <button id = "g_id"  class = "button button1">X-</button>
+        </div>
+
+        <div>
+            <button id = "r_id"  class = "button button2">Y+</button>
+            <button id = "g_id"  class = "button button1">Y-</button>
+        </div>
+
+        <div>
+            <button id = "r_id"  class = "button button2">Z+</button>
+            <button id = "g_id"  class = "button button1">Z-</button>
+        </div>
+
+    </div>
+
+    <!-- rotation on joints:  -->
+    <div class="div2">
+
+        <div>
+            <button id = "r_id"  class = "button button2">R1+</button>
+            <button id = "g_id"  class = "button button1">R1-</button>
+        </div>
+
+        <div>
+            <button id = "r_id"  class = "button button2">R2+</button>
+            <button id = "g_id"  class = "button button1">R2-</button>
+        </div>
+
+        <div>
+            <button id = "r_id"  class = "button button2">R3+</button>
+            <button id = "g_id"  class = "button button1">R3-</button>
+        </div>
+
+    </div>
+
+</div>
+
+    <!--TEXT ABOUT POSITION: -->
+    <h2 class="h">Parameters:</h2>
+    <div class ="control-panel">
         
-            //LED_GREEN
-            const led_g_on = "http://192.168.10.1/led_g_on";
-            const led_g_off = "http://192.168.10.1/led_g_off";
+         <div class="div2 slider-container">
+            <h3 class="h">Acceleration</h3>
+            <div class ="rect" id="sliderValue1" >20</div>
+            <input type="range" id="mySlider1" min="20" max="50" value="20">
+         </div>
 
-            const Led_green = new TurnLed(led_g_on,led_g_off,"g_id");
+         <div class="div2 slider-container">
+            <h3 class="h">Velocity</h3>
+            <div class ="rect" id="sliderValue2" >1000</div>
+            <input type="range" id="mySlider2"  min="1000" max="3000" value="1000" >
 
-             //LED_RED
-            const led_r_on = "http://192.168.10.1/led_r_on";
-            const led_r_off = "http://192.168.10.1/led_r_off";
 
-            const Led_red = new TurnLed(led_r_on,led_r_off,"r_id");
+         </div>
+    </div>
 
-            //LED_YELLOW
-            const led_y_on = "http://192.168.10.1/led_y_on";
-            const led_y_off = "http://192.168.10.1/led_y_off";
-
-            const Led_yellow = new TurnLed(led_y_on,led_y_off,"y_id");
-
-        </script>
-        <style>
-            .button{
-                border: none;
-                font-size: large;
-                color: white;
-                padding: 64px 64px;
-                cursor: pointer;
-            }
-            .button1{background-color: rgb(102, 255, 31);}
-            .button1:hover{background-color: rgb(173, 255, 118); }
-
-            .button2{background-color: rgb(255, 55, 55);}
-            .button2:hover{background-color: rgb(255, 142, 142); }
-
-            .button3{background-color: rgb(255, 224, 51);}
-            .button3:hover{background-color: rgb(253, 251, 109); }
-        </style>
-        <title>MyJavaSript</title>
-    </head>
-    <body>
-        <h1>MY ESP 8266 SERVER</h1>
-
-        <p1><button id = r_id  type="button" onclick="Led_red.turn()" class = "button button2">TURN ON</button></p1>
-        <p2><button id = y_id  type="button" onclick="Led_yellow.turn()" class = "button button3">TURN ON</button></p2>
-        <p3><button id = g_id  type="button" onclick="Led_green.turn()" class = "button button1">TURN ON</button></p3>
-    </body>
+    <script src="server_API.js"></script> 
+     
+</body>
 </html>
